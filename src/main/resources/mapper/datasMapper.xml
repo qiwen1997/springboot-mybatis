@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.newtask.springbootmybatis.mapper.datasDao" >
+
+  <!--<resultMap id="dataMap" type="com.newtask.springbootmybatis.entity.data" >-->
+
+    <!--<result column="einvoice_code" property="einvoiceCode" jdbcType="VARCHAR"/>-->
+    <!--<result column="einvoice_number" property="einvoiceNumber" jdbcType="VARCHAR"/>-->
+    <!--<result column="random_number" property="randomNumber" jdbcType="VARCHAR"/>-->
+    <!--<result column="issue_date" property="issueDate"  jdbcType="VARCHAR"/>-->
+    <!--<result column="total_amount" property="totalAmount" jdbcType="DOUBLE"/>-->
+    <!--<result column="handling_person" property="handlingPerson" jdbcType="VARCHAR"/>-->
+    <!--<result column="payer_party_name" property="payerPartyName" jdbcType="VARCHAR"/>-->
+    <!--<collection property="items" column="id" jdbcType="VARCHAR"-->
+      <!--select="com.newtask.springbootmybatis.mapper.itemDao.selectByHid"></collection>-->
+
+  <!--</resultMap>-->
+
+  <resultMap id="BaseResultMap" type="com.newtask.springbootmybatis.entity.datas" >
+    <result column="fpqqlsh" property="fpqqlsh" jdbcType="VARCHAR"/>
+    <result column="status_code" property="statusCode" jdbcType="VARCHAR"/>
+
+    <association property="data" column="fpqqlsh" jdbcType="VARCHAR"
+    javaType="com.newtask.springbootmybatis.entity.data">
+      <result column="einvoice_code" property="einvoiceCode" jdbcType="VARCHAR"/>
+      <result column="einvoice_number" property="einvoiceNumber" jdbcType="VARCHAR"/>
+      <result column="random_number" property="randomNumber" jdbcType="VARCHAR"/>
+      <result column="issue_date" property="issueDate"  jdbcType="VARCHAR"/>
+      <result column="total_amount" property="totalAmount" jdbcType="DOUBLE"/>
+      <result column="handling_person" property="handlingPerson" jdbcType="VARCHAR"/>
+      <result column="payer_party_name" property="payerPartyName" jdbcType="VARCHAR"/>
+      <collection property="items" column="id" jdbcType="INTEGER"
+      select="com.newtask.springbootmybatis.mapper.itemDao.selectByHid"></collection>
+
+    </association>
+  </resultMap>
+
+  <select id="selectByFpqqlsh" resultMap="BaseResultMap" parameterType="String" >
+    select * from inv_apply where fpqqlsh=#{fpqqlsh}
+  </select>
+
+  <select id="selectid"  parameterType="String" resultType="int" >
+    select id from inv_apply where fpqqlsh=#{fpqqlsh}
+  </select>
+
+  <insert id="insert" parameterType="com.newtask.springbootmybatis.entity.datas"
+    >
+		INSERT INTO inv_apply
+		(
+		fpqqlsh,status_code,einvoice_code,einvoice_number,random_number,
+		total_amount,handling_person,payer_party_name
+		)
+		VALUES (
+		#{fpqqlsh},
+		#{statusCode},
+		#{data.einvoiceCode},
+		#{data.einvoiceNumber},
+		#{data.randomNumber},
+
+		#{data.totalAmount},
+		#{data.handlingPerson},
+		#{data.payerPartyName}
+		)
+	</insert>
+
+  <delete id="delete">
+		delete from inv_apply where id=#{id}
+	</delete>
+
+  <update id="Update" parameterType="com.newtask.springbootmybatis.entity.datas"
+    keyProperty="id" useGeneratedKeys="true">
+	update inv_apply set
+	fpqqlsh=#{fpqqlsh},status_code=#{statusCode},einvoice_code=#{data.einvoiceCode},
+	einvoice_number=#{data.einvoiceNumber},random_number=#{data.randomNumber},
+		issue_date=#{data.issueDate},total_amount=#{data.totalAmount},
+		handling_person=#{data.handlingPerson},payer_party_name=#{data.payerPartyName}
+
+		where fpqqlsh=#{fpqqlsh}
+	</update>
+</mapper>

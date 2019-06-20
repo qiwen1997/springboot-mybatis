@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.newtask.springbootmybatis.mapper.itemDao" >
+  <resultMap id="BaseResultMap" type="com.newtask.springbootmybatis.entity.item" >
+
+    <result column="item_code" property="itemCode" jdbcType="VARCHAR"/>
+    <result column="item_name" property="itemName" jdbcType="VARCHAR"/>
+    <result column="item_unit" property="itemUnit" jdbcType="VARCHAR"/>
+    <result column="item_quantity" property="itemQuantity"  jdbcType="INTEGER"/>
+    <result column="item_std" property="itemStd" jdbcType="DOUBLE"/>
+    <result column="item_amount" property="itemAmount" jdbcType="DOUBLE"/>
+  </resultMap>
+
+  <select id="selectByHid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select item_code,item_name,item_unit,item_quantity,item_std,item_amount from inv_apply_b where hid = #{id}
+  </select>
+
+  <insert id="insertItem">
+		INSERT INTO inv_apply_b
+		(
+		hid,item_code,item_name,item_unit,item_quantity,item_std,item_amount
+		)
+		VALUES (
+		#{hid},
+		#{item.itemCode},
+		#{item.itemName},
+		#{item.itemUnit},
+		#{item.itemQuantity},
+		#{item.itemStd},
+		#{item.itemAmount}
+		)
+	</insert>
+
+  <delete id="delete" parameterType="int">
+		delete from inv_apply_b where hid=#{hid}
+	</delete>
+
+  <update id="Update">
+	update inv_apply_b set
+	 item_code=#{item.itemCode},
+	 item_name=#{item.itemName},
+	 item_unit=#{item.itemUnit},
+	 item_quantity=#{item.itemQuantity},
+	 item_std=#{item.itemStd},
+	 item_amount=#{item.itemAmount}
+	 where hid=#{hid}
+	</update>
+</mapper>

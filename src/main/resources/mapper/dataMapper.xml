@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.newtask.springbootmybatis.mapper.dataDao" >
+
+  <!--<resultMap id="itemMap" type="com.newtask.springbootmybatis.entity.item" >-->
+
+    <!--<result column="item_code" property="itemCode" jdbcType="VARCHAR"/>-->
+    <!--<result column="item_name" property="itemName" jdbcType="VARCHAR"/>-->
+    <!--<result column="item_unit" property="itemUnit" jdbcType="VARCHAR"/>-->
+    <!--<result column="item_quantity" property="itemQuantity"  jdbcType="INTEGER"/>-->
+    <!--<result column="item_std" property="itemStd" jdbcType="DOUBLE"/>-->
+    <!--<result column="item_amount" property="itemAmount" jdbcType="DOUBLE"/>-->
+  <!--</resultMap>-->
+
+  <resultMap id="BaseResultMap" type="com.newtask.springbootmybatis.entity.data" >
+
+    <result column="einvoice_code" property="einvoiceCode" jdbcType="VARCHAR"/>
+    <result column="einvoice_number" property="einvoiceNumber" jdbcType="VARCHAR"/>
+    <result column="random_number" property="randomNumber" jdbcType="VARCHAR"/>
+    <result column="issue_date" property="issueDate"  jdbcType="VARCHAR"/>
+    <result column="total_amount" property="totalAmount" jdbcType="DOUBLE"/>
+    <result column="handling_person" property="handlingPerson" jdbcType="VARCHAR"/>
+    <result column="payer_party_name" property="payerPartyName" jdbcType="VARCHAR"/>
+    <collection property="items" column="id" jdbcType="VARCHAR"
+
+      ofType="com.newtask.springbootmybatis.entity.item">
+      <result column="item_code" property="itemCode" jdbcType="VARCHAR"/>
+      <result column="item_name" property="itemName" jdbcType="VARCHAR"/>
+      <result column="item_unit" property="itemUnit" jdbcType="VARCHAR"/>
+      <result column="item_quantity" property="itemQuantity"  jdbcType="INTEGER"/>
+      <result column="item_std" property="itemStd" jdbcType="DOUBLE"/>
+      <result column="item_amount" property="itemAmount" jdbcType="DOUBLE"/>
+
+    </collection>
+
+  </resultMap>
+
+  <select id="selectByFpqqlsh" resultMap="BaseResultMap" parameterType="String" >
+    select * from inv_apply inner join inv_apply_b where fpqqlsh=#{fpqqlsh}
+  </select>
+
+</mapper>
