@@ -1,5 +1,8 @@
 package com.newtask.springbootmybatis.entity;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class datas {
 
   private String fpqqlsh;
