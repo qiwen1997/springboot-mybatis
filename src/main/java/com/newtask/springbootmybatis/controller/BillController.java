@@ -83,10 +83,10 @@ public class BillController {
 
   }
 
-  public bill setBill(datas datas,String StatusCode,String fpqqlsh){
+  public bill setBill(datas datas,String StatusMsg,String fpqqlsh){
     bill.setCode("0000");
     bill.setMsg("查询成功");
-    datas.setStatusCode(StatusCode);
+    datas.setStatusMsg(StatusMsg);
     bill.setDatas(datas);
     stringRedisTemplate.opsForValue().set("practice:invoice:"+fpqqlsh, JSONObject.toJSONString(bill),10*60,
         TimeUnit.SECONDS);

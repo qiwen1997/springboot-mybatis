@@ -16,7 +16,7 @@ public class ControllerExceptionHandler {
 
   @ExceptionHandler(IllegalArgumentException.class)
   @ResponseStatus
-  public bill handerI(Exception e){
+  public bill handerI(IllegalArgumentException e){
     bill bill=new bill();
     bill.setCode("1001");
     bill.setMsg("查询失败,数据不合法");

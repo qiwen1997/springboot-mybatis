@@ -36,7 +36,10 @@
   </resultMap>
 
   <select id="selectByFpqqlsh" resultMap="BaseResultMap" parameterType="String" >
-    select * from inv_apply where fpqqlsh=#{fpqqlsh}
+    select id,fpqqlsh,status_code,einvoice_code,
+     einvoice_number,random_number,issue_date,
+     total_amount,handling_person,payer_party_name
+     from inv_apply where fpqqlsh=#{fpqqlsh}
   </select>
 
   <select id="selectid"  parameterType="String" resultType="int" >

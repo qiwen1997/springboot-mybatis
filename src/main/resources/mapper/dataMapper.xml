@@ -36,7 +36,12 @@
   </resultMap>
 
   <select id="selectByFpqqlsh" resultMap="BaseResultMap" parameterType="String" >
-    select * from inv_apply inner join inv_apply_b where fpqqlsh=#{fpqqlsh}
+    select einvoice_code,einvoice_number,random_number,
+     issue_date,total_amount,handling_person,
+     payer_party_name,item_code,item_name,
+     item_unit,item_quantity,item_std",
+     item_amount
+     from inv_apply inner join inv_apply_b where fpqqlsh=#{fpqqlsh}
   </select>
 
 </mapper>

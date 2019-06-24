@@ -35,9 +35,8 @@ public class TestController {
     item item =new item("111","222","333",44,55,66);
     List<item> itemList=new ArrayList<>();
     itemList.add(item);
-//增加
+    //增加
 //    int x=itemDao.insertItem(item,2);
-//
 //    logger.info("x:"+String.valueOf(x));
 
     //更新
@@ -51,9 +50,8 @@ public class TestController {
 
     data data=new data("yyy","uuu","iii",65,"kji","iop",itemList);
     datas datas =new datas("456789","4","fdg",data);
-//增加
+    //增加
 //    int x=datasDao.insert(datas);
-//
 //    logger.info("x:"+String.valueOf(x));
 
     //更新
