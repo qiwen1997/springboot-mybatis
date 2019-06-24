@@ -23,6 +23,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import top.jfunc.json.JsonObject;
 
@@ -46,7 +47,7 @@ public class BillController {
   private RedisTemplate<String, String> redisCacheTemplate;
 
   @UserLoginToken
-  @RequestMapping("/query")
+  @RequestMapping(value = "/query", method = RequestMethod.POST)
   @ResponseBody
   public bill select(HttpServletRequest request, Model model){
     String fpqqlsh=new String();
